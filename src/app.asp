@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="app"></div>
-	<script src="//localhost:4222/app.js"></script>
+	<script src="//192.168.50.237:4222/app.js"></script>
 </body>
 
 </html>

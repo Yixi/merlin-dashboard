@@ -1,21 +1,13 @@
-:local {
-  .container {
-    background-color: #c1c1c1;
-    .abc {
-      background-color: rebeccapurple;
-    }
-    :global{
-      .ga {
-        background-color: green;
-      }
-    }
-  }
-
-  :global(.gb) {
-    background-color: red;
-  }
+body {
+  background: #0c152c;
+  color: #FFFFFF;
 }
 
-.out {
-  background-color: ghostwhite;
+.App {
+  display: flex;
+  &_content {
+    flex: 1;
+    padding: 30px;
+    height: 100vh;
+  }
 }

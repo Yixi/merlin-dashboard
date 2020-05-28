@@ -1,25 +1,43 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import useSWR, { ConfigInterface, responseInterface } from 'swr'
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 
 export type GetRequest = AxiosRequestConfig | null
 
-export interface IConfig<Data = unknown, Error = unknown>
-  extends Omit<ConfigInterface<AxiosResponse<Data>, AxiosError<Error>>, 'initialData'> {
-  initialData?: Data
-}
-
-interface IReturn<Data, Error>
-  extends Pick<responseInterface<AxiosResponse<Data>, AxiosError<Error>>, 'isValidating' | 'revalidate' | 'error'> {
+interface Return<Data, Error>
+  extends Pick<
+    responseInterface<AxiosResponse<Data>, AxiosError<Error>>,
+    'isValidating' | 'revalidate' | 'error' | 'mutate'
+    > {
   data: Data | undefined
   response: AxiosResponse<Data> | undefined
 }
 
+export interface Config<Data = unknown, Error = unknown>
+  extends Omit<
+    ConfigInterface<AxiosResponse<Data>, AxiosError<Error>>,
+    'initialData'
+    > {
+  initialData?: Data
+}
+
+export const httpRequest = axios.create()
+
 export default function useRequest<Data = unknown, Error = unknown>(
   request: GetRequest,
-  {initialData, ...config}: IConfig<Data, Error> = {}
-): IReturn<Data, Error> {
-  const {data: response, error, isValidating, revalidate} = useSWR<AxiosResponse<Data>, AxiosError<Error>>(
-    request && JSON.stringify(request), () => axios(request || {}), {
+  { initialData, ...config }: Config<Data, Error> = {}
+): Return<Data, Error> {
+  const { data: response, error, isValidating, revalidate, mutate } = useSWR<
+    AxiosResponse<Data>,
+    AxiosError<Error>
+    >(
+    request && JSON.stringify(request),
+    /**
+     * NOTE: Typescript thinks `request` can be `null` here, but the fetcher
+     * function is actually only called by `useSWR` when it isn't.
+     */
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    () => axios(request!),
+    {
       ...config,
       initialData: initialData && {
         status: 200,
@@ -28,7 +46,8 @@ export default function useRequest<Data = unknown, Error = unknown>(
         headers: {},
         data: initialData,
       },
-    })
+    }
+  )
 
   return {
     data: response && response.data,
@@ -36,6 +55,6 @@ export default function useRequest<Data = unknown, Error = unknown>(
     error,
     isValidating,
     revalidate,
+    mutate,
   }
-
 }

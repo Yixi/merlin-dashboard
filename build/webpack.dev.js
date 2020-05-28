@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const Scp = require('./scp')
 
 const PORT = 4222
-const _HOST = '0.0.0.0'
+const _HOST = '192.168.50.237'
 const HOST = `http://${_HOST}`
 const URL = `${HOST}:${PORT}`
 
@@ -55,7 +55,7 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/i,
+        test: /\.scss$|.css$/i,
         use: [
           'style-loader',
           {

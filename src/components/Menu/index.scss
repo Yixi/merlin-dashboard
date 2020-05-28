@@ -1,0 +1,46 @@
+.Menu {
+  flex: 0 0 auto;
+  width: 350px;
+  background: #131a32;
+  height: 100vh;
+  font-size: 1.4em;
+
+  &_header {
+    height: 70px;
+    background: linear-gradient(to right, #1a3c51, #292c52);
+  }
+
+  &_info {
+    height: 55px;
+    background-color: #19223a;
+  }
+
+  &_items {
+    padding: 30px;
+
+    & > div {
+      height: 54px;
+      line-height: 54px;
+
+      & > a {
+        color: #636e88;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #fff;
+        }
+
+        &.active {
+          color: #fff;
+        }
+
+        & > span:nth-child(2) {
+          margin-left: 10px;
+        }
+      }
+
+
+    }
+  }
+}

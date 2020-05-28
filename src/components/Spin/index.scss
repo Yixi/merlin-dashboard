@@ -1,0 +1,38 @@
+.Spin {
+  display: inline-block;
+
+  & > span {
+    height: 10px;
+    width: 2px;
+    background: #0ec1cb;
+    display: inline-block;
+    vertical-align: middle;
+    animation: opacity 1000ms infinite ease-in-out;
+  }
+
+  span + span {
+    margin-left: 2px;
+  }
+
+  @for $i from 1 through 7 {
+    & > span:nth-child(#{$i}) {
+      animation-delay: #{$i * 200}ms;
+    }
+  }
+}
+
+
+@keyframes opacity {
+  0% {
+    opacity: 1;
+    height: 10px;
+  }
+  50% {
+    opacity: 0;
+    height: 3px;
+  }
+  100% {
+    opacity: 1;
+    height: 10px;
+  }
+}

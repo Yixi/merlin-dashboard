@@ -1,3 +1,2 @@
-# react webpack starter
+# WIP
 
-a basic start project template for react and typesript
