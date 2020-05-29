@@ -8,6 +8,12 @@
   &_header {
     height: 70px;
     background: linear-gradient(to right, #1a3c51, #292c52);
+    line-height: 70px;
+    padding: 0 30px;
+
+    img {
+      margin-right: 10px;
+    }
   }
 
   &_info {

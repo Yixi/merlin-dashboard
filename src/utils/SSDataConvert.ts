@@ -71,3 +71,22 @@ const generateNodeInfo = (ssConfig: any) => {
   return nodes
 }
 
+export const convertSSStatus = (statusString: string) => {
+  const status = statusString.split('@@')
+  const foreignTimeMatch = status[0].match(/【(.*?)】/i)
+  const foreignPingMatch = status[0].match(/(\d+)\sms/i)
+  const inlandTimeMatch = status[1].match(/【(.*?)】/i)
+  const inlandPingMatch = status[1].match(/(\d+)\sms/i)
+
+  return {
+    foreign: {
+      time: foreignTimeMatch ? foreignTimeMatch[1] : null,
+      ping: foreignPingMatch ? +foreignPingMatch[1] : null,
+    },
+    inland: {
+      time: inlandTimeMatch ? inlandTimeMatch[1] : null,
+      ping: inlandPingMatch ? +inlandPingMatch[1] : null,
+    },
+  }
+}
+

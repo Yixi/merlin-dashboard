@@ -1,0 +1,29 @@
+.SSStatus {
+  height: 225px;
+  background: linear-gradient(to right, #1f384d, #11273c);
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 375px;
+  padding: 40px;
+  .section {
+    display: flex;
+    & > div:nth-child(1) {
+      width: 100px;
+      & > div:nth-child(1) {
+        font-size: 1em;
+        color: #797b8f;
+      }
+      & >div:nth-child(2) {
+        font-size: 1.6em;
+      }
+    }
+
+    & > div:nth-child(2) {
+      flex: 1;
+    }
+
+    & + .section {
+      margin-top: 30px;
+    }
+  }
+}

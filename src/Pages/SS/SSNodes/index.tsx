@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { convertSSType, ISSNode } from '@root/utils/SSDataConvert'
 import './index.scss'
-import { CheckCircleFilled, MinusCircleFilled } from '@ant-design/icons'
+import { CheckCircleFilled, MinusCircleFilled, WarningFilled } from '@ant-design/icons'
 import { httpRequest } from '@root/hooks/useRequest'
 import { generateProcessId } from '@root/utils/tools'
 import Spin from '@root/components/Spin'
@@ -70,7 +70,9 @@ const SSNode: React.FC<{ node: ISSNode, ping: string[] }> = (props) => {
 
   return (
     <div className={cls('SSNodes_node', {failed: isFailed}, {select: props.node.isSelected})}>
-      <span>{props.node.isSelected ? <CheckCircleFilled/> : <MinusCircleFilled/>}</span>
+      <span>
+        {isFailed ? <WarningFilled/> : props.node.isSelected ? <CheckCircleFilled/> : <MinusCircleFilled/>}
+      </span>
       <span><span className="tag">{convertSSType(props.node.type)}</span></span>
       <span className="name">{props.node.name}</span>
       <span>

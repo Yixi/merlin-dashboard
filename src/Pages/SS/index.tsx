@@ -3,6 +3,8 @@ import useRequest from '@root/hooks/useRequest'
 import { convertSSConfig, ISSConfig } from '@root/utils/SSDataConvert'
 import SSCurrent from '@root/Pages/SS/Current'
 import SSNodes from '@root/Pages/SS/SSNodes'
+import SSStatus from '@root/Pages/SS/Status'
+import './index.scss'
 
 export default function SS() {
 
@@ -18,8 +20,11 @@ export default function SS() {
 
   if (config) {
     return (
-      <div>
-        <SSCurrent current={config.current}/>
+      <div className="SS">
+        <div className="SS_header">
+          <SSStatus />
+          <SSCurrent current={config.current}/>
+        </div>
         <SSNodes nodes={config.nodes}/>
       </div>
     )

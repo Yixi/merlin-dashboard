@@ -31,6 +31,12 @@
     color: #4f85c9;
     display: flex;
     flex: 1;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      transform: scale(1.03);
+    }
 
     &.failed {
       background: linear-gradient(to right, #291a33, #231b32);
