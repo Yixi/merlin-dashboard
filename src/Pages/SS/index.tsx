@@ -1,10 +1,9 @@
 import * as React from 'react'
 import useRequest from '@root/hooks/useRequest'
 import { convertSSConfig, ISSConfig } from '@root/utils/SSDataConvert'
-import SSCurrent from '@root/Pages/SS/Current'
-import SSNodes from '@root/Pages/SS/SSNodes'
-import SSStatus from '@root/Pages/SS/Status'
-import './index.scss'
+import { Switch, Route } from 'react-router-dom'
+import SSHome from '@root/Pages/SS/Home'
+import SSSubscription from '@root/Pages/SS/Sub'
 
 export default function SS() {
 
@@ -19,14 +18,12 @@ export default function SS() {
   }, [data])
 
   if (config) {
+    console.log(config)
     return (
-      <div className="SS">
-        <div className="SS_header">
-          <SSStatus />
-          <SSCurrent current={config.current}/>
-        </div>
-        <SSNodes nodes={config.nodes}/>
-      </div>
+      <Switch>
+        <Route path="/ss/home"><SSHome config={config}/></Route>
+        <Route path="/ss/sub"><SSSubscription config={config.subscription}/></Route>
+      </Switch>
     )
   }
 

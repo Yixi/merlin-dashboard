@@ -13,13 +13,9 @@ function App() {
         <Menu/>
         <div className="App_content">
           <Switch>
-            <Route path="/ss">
-              <SS/>
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard/>
-            </Route>
-            <Redirect from="/" to="/dashboard" />
+            <Route path="/ss"><SS/></Route>
+            <Route path="/dashboard"><Dashboard/></Route>
+            <Redirect from="/" to="/dashboard"/>
           </Switch>
         </div>
       </div>

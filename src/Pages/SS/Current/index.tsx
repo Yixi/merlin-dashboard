@@ -5,8 +5,10 @@ import { ISSCurrent } from '@root/utils/SSDataConvert'
 
 const SSCurrent: React.FC<{ current: ISSCurrent }> = (props) => {
   return (
-    <div className="SSCurrent">
+    <div className="SSCurrent card">
+      <div>当前节点</div>
       <Switch defaultChecked={props.current.ssEnable}/>
+      <div>{props.current.name}</div>
     </div>
   )
 }

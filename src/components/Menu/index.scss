@@ -28,6 +28,11 @@
       height: 54px;
       line-height: 54px;
 
+      &.title {
+        font-size: 0.8em;
+        color: #636e88;
+      }
+
       & > a {
         color: #636e88;
         cursor: pointer;

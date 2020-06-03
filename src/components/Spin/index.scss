@@ -11,7 +11,7 @@
   }
 
   span + span {
-    margin-left: 2px;
+    margin-left: 2px !important;
   }
 
   @for $i from 1 through 7 {

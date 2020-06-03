@@ -1,6 +1,6 @@
 body {
   background: #0c152c;
-  color: #FFFFFF;
+  color: #7f8bad;
 }
 
 .App {
@@ -9,5 +9,12 @@ body {
     flex: 1;
     padding: 30px;
     height: 100vh;
+    overflow-y: auto;
   }
+}
+
+.card {
+  background: linear-gradient(to right, #1f384d, #11273c);
+  border-radius: 10px;
+  padding: 30px;
 }

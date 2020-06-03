@@ -2,12 +2,15 @@ import { keys, startsWith, range } from 'lodash'
 
 export interface ISSConfig {
   current?: ISSCurrent
-  nodes?: ISSNode[]
+  nodes?: ISSNode[],
+  subscription?: ISSSubscription
 }
 
 export interface ISSCurrent {
   ssEnable: boolean,
-  currentKey: string
+  currentKey: string,
+  name: string,
+  mode: string
 }
 
 export interface ISSNode {
@@ -16,6 +19,19 @@ export interface ISSNode {
   type: number,
   key: string,
   isSelected: boolean
+}
+
+export interface ISSSubscription {
+  link: string
+}
+
+export const convertSSConfig = (ssConfig: any) => {
+  const result = ssConfig.result[0]
+  const data: ISSConfig = {}
+  data.current = generateCurrentInfo(result)
+  data.nodes = generateNodeInfo(result)
+  data.subscription = generateSubscriptionInfo(result)
+  return data
 }
 
 export const convertSSType = (type: number) => {
@@ -31,15 +47,16 @@ export const convertSSType = (type: number) => {
   }
 }
 
-export const convertSSConfig = (ssConfig: any) => {
-  const result = ssConfig.result[0]
-  const data: ISSConfig = {}
-  data.current = {
-    ssEnable: !!result.ss_basic_enable,
-    currentKey: result.ssconf_basic_node,
+const generateCurrentInfo = (ssConfig: any) => {
+  // const namesKey = keys(ssConfig).filter(key => startsWith(key, 'ssconf_basic_') && endsWith(key, ssConfig.ssconf_basic_node))
+  // console.log(namesKey)
+  const currentKey = ssConfig.ssconf_basic_node
+  return {
+    ssEnable: !!ssConfig.ss_basic_enable,
+    currentKey,
+    name: ssConfig[`ssconf_basic_name_${currentKey}`],
+    mode: ssConfig[`ssconf_basic_mode_${currentKey}`],
   }
-  data.nodes = generateNodeInfo(result)
-  return data
 }
 
 const generateNodeInfo = (ssConfig: any) => {
@@ -69,6 +86,12 @@ const generateNodeInfo = (ssConfig: any) => {
     })
   })
   return nodes
+}
+
+const generateSubscriptionInfo = (ssConfig: any) => {
+  return {
+    link: window.atob(ssConfig.ss_online_links),
+  }
 }
 
 export const convertSSStatus = (statusString: string) => {
